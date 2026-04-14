@@ -1,5 +1,8 @@
 package Etapa2;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -7,31 +10,45 @@ public class PrincipalCandidatos {
 
     public static void main(String[] args) {
 
-        Random random = new Random();
+        ArrayList<String> nomesLista = new ArrayList<>();
+        ArrayList<String> partidosLista = new ArrayList<>();
 
-        // tamanho aleatório entre 1 e 100
+        try {
+            BufferedReader brNomes = new BufferedReader(new FileReader("src/Etapa2/nomes.txt"));
+            String linha;
+            while ((linha = brNomes.readLine()) != null) {
+                nomesLista.add(linha);
+            }
+            brNomes.close();
+
+            BufferedReader brPartidos = new BufferedReader(new FileReader("src/Etapa2/partidos.txt"));
+            while ((linha = brPartidos.readLine()) != null) {
+                partidosLista.add(linha);
+            }
+            brPartidos.close();
+
+        } catch (Exception e) {
+            System.out.println("Erro ao ler arquivos.");
+            return;
+        }
+
+        Random random = new Random();
         int tamanho = random.nextInt(100) + 1;
 
         Candidato[] candidatos = new Candidato[tamanho];
 
-        String[] nomes = {"Ana", "Carlos", "Bruno", "Daniel", "Eduardo", "Fernanda"};
-        String[] partidos = {"A", "B", "C"};
-
-        // preencher com dados aleatórios
         for (int i = 0; i < candidatos.length; i++) {
-            String nome = nomes[random.nextInt(nomes.length)];
-            String partido = partidos[random.nextInt(partidos.length)];
+            String nome = nomesLista.get(random.nextInt(nomesLista.size()));
+            String partido = partidosLista.get(random.nextInt(partidosLista.size()));
             int votos = random.nextInt(100);
 
             candidatos[i] = new Candidato(nome, partido, votos);
         }
 
-        // CHAMADAS OBRIGATÓRIAS (validador verifica isso)
         OrdenarCandidatos.ordenaCandidatosPorNome(candidatos);
         OrdenarCandidatos.ordenaCandidatosPorVotos(candidatos);
         OrdenarCandidatos.ordenaCandidatosPorPartido(candidatos);
 
-        // Ordena por nome antes da busca binária
         OrdenarCandidatos.ordenaCandidatosPorNome(candidatos);
 
         Scanner sc = new Scanner(System.in);
