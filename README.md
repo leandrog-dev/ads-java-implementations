@@ -1,6 +1,7 @@
 # ads-java-implementations
 
-Esse repositório é basicamente um compilado das coisas que fui fazendo durante o curso de ADS. A ideia foi juntar tudo num lugar só — desde resolver labirinto com recursão até implementar pilha e fila na mão, sem usar biblioteca pronta.
+Esse repositório é basicamente um compilado das coisas que fui fazendo durante o curso de ADS durante um projeto acadêmico. 
+— desde resolver labirinto com recursão até implementar pilha e fila na mão, sem usar biblioteca pronta.
 
 Serve tanto pra eu revisar depois quanto pra quem estiver estudando os mesmos assuntos.
 
